@@ -9,5 +9,5 @@ Vagrantfiles for provisioning our OPNsense Infrastructure for M146 at BBZW Surse
 git clone https://github.com/mcree/vagrant-opnsense.git
 cd vagrant-opnsense
 cd test
-vagrant up --provider=hyperv
+vagrant up --provider virtualbox
 ```
