@@ -11,3 +11,7 @@ cd vagrant-opnsense
 cd test
 vagrant up --provider virtualbox
 ```
+
+### Firewall Policies for LAN, WAN and DMZ
+
+https://github.com/mcree/vagrant-opnsense/blob/master/test/config.xml
