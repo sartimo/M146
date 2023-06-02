@@ -17,14 +17,11 @@ sysctl net.inet.ip.forwarding=1
 
 # Add firewall rules for LAN, DMZ, and WAN
 cat > /usr/local/etc/ipfw.rules <<EOF
-# Allow LAN to DMZ
-add allow ip from 192.168.1.0/24 to 192.168.2.0/24
+# Deny traffic from WAN to LAN
+add deny ip from 192.168.3.0/24 to 192.168.1.0/24
 
-# Allow LAN to WAN
-add allow ip from 192.168.1.0/24 to 192.168.3.0/24
-
-# Allow DMZ to WAN
-add allow ip from 192.168.2.0/24 to 192.168.3.0/24
+# Allow traffic from WAN to DMZ for specific IP address
+add allow ip from 192.168.3.2 to 192.168.2.0/24
 
 # Allow established connections
 add check-state
@@ -47,3 +44,19 @@ EOF
 
 # Start DHCP server
 /usr/local/etc/rc.d/dhcpd restart
+
+# Enable web filter for malicious sites
+cat >> /usr/local/etc/squid/squid.conf <<EOF
+# Web filter for malicious sites
+acl blocklist dstdom_regex -i "/usr/local/etc/blocklist.txt"
+http_access deny blocklist
+EOF
+
+# Create a blocklist file for malicious sites
+cat > /usr/local/etc/blocklist.txt <<EOF
+.*malicious-site1.com.*
+.*malicious-site2.net.*
+EOF
+
+# Restart Squid service
+/usr/local/etc/rc.d/squid restart
