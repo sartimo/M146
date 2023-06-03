@@ -33,16 +33,35 @@ Vagrantfiles for provisioning our OPNsense Infrastructure for M146 at BBZW Surse
 1. Download virtualbox latest
 2. Download vagrant latest
 
+#### Pre-Requesities
+
 ```bash
 setx /m VBOX_INSTALL_PATH "C:\Program Files \Oracle\Virtualbox"
 refreshenv
-```
-
-```bash
 git clone https://github.com/mcree/vagrant-opnsense.git
 cd vagrant-opnsense
 cd test
-vagrant up --provider virtualbox
+```
+
+#### (In a new terminal) Boot LAN Workstation
+
+```bash
+vagrant up lanws --provider virtualbox
+vagrant ssh lanws
+```
+
+
+#### (In a new terminal) Boot DMZ Server
+
+```bash
+vagrant up dmzsrv
+vagrant ssh dmzsrv
+```
+
+#### (In main Terminal) boot firewall
+
+```bash
+vagrant up fw --provider virtualbox
 ```
 
 3. Login to the Firewall. User: root, PW: opnsense. You may also connect to the Web Dashboard which is bridged on 127.0.0.1:10443
