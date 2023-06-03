@@ -52,29 +52,37 @@ cd vagrant-opnsense
 cd test
 ```
 
-#### (In a new terminal) Boot LAN Workstation
-
-```bash
-vagrant up lanws --provider virtualbox
-vagrant ssh lanws
-```
-
-
-#### (In a new terminal) Boot DMZ Server
-
-```bash
-vagrant up dmzsrv
-vagrant ssh dmzsrv
-```
-
 #### (In main Terminal) boot firewall
+
+Username: vagrant
+
+Password: opnsense
 
 ```bash
 vagrant up fw --provider virtualbox
 ```
 
 3. Login to the Firewall. User: root, PW: opnsense. You may also connect to the Web Dashboard which is bridged on 127.0.0.1:10443
-4. Boot the LAN Windows Client using: ```vagrant rdp lanws```. This will trigger the vagrant daemon to fetch the windows10 box. After this is done, you can RDP into the LANWS.
-5. Boote the DMZ Server using: ```vagrant ssh dmzsrv```.
-6. Testing 
+
+
+#### (In a new terminal) Boot LAN Workstation
+
+Username: vagrant
+
+Password: vagrant
+
+```bash
+vagrant up lanws --provider virtualbox
+```
+
+
+#### (In a new terminal) Boot DMZ Server
+
+Username: vagrant
+
+Password: vagrant
+
+```bash
+vagrant up dmzsrv
+```
 
