@@ -7,6 +7,7 @@ Vagrantfiles for provisioning our OPNsense Infrastructure for M146 at BBZW Surse
 
 ```bash
 setx /m VBOX_INSTALL_PATH "C:\Program Files \Oracle\Virtualbox"
+refreshenv
 ```
 
 ```bash
