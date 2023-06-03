@@ -1,7 +1,7 @@
 # M146
 Vagrantfiles for provisioning our OPNsense Infrastructure for M146 at BBZW Sursee
 
-### Testing on Windows 11 22H2 virtualbox
+### Testing on Windows 11 22H2 virtualbox (works)
 
 1. Download virtualbox latest
 2. Download vagrant latest
@@ -18,25 +18,11 @@ cd test
 vagrant up --provider virtualbox
 ```
 
-### Testing on Windows Hyper-V (seems to work)
+3. Login to the Firewall. User: root, PW: opnsense. You may also connect to the Web Dashboard which is bridged on 127.0.0.1:10443
+4. Boot the LAN Windows Client using: ```vagrant rdp lanws```. This will trigger the vagrant daemon to fetch the windows10 box. After this is done, you can RDP into the LANWS.
+5. Boote the DMZ Server using: ```vagrant ssh dmzsrv```.
+6. Testing 
 
-1. Activate Hyper-V
-2. 
-```batch
-pushd "%~dp0"
-dir /b %SystemRoot%\servicing\Packages\*Hyper-V*.mum >hv-home.txt
-for /f %%i in ('findstr /i . hv-home.txt 2^>nul') do dism /online /norestart /add-package:"%SystemRoot%\servicing\Packages\%%i"
-del hv-home.txt
-Dism /online /enable-feature /featurename:Microsoft-Hyper-V -All /LimitAccess /ALL
-pause
-```
-
-```bash
-git clone https://github.com/mcree/vagrant-opnsense.git
-cd vagrant-opnsense
-cd test
-vagrant up --provider hyperv
-```
 
 ### Firewall Policies for LAN, WAN and DMZ
 
