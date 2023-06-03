@@ -30,8 +30,8 @@ Vagrantfiles for provisioning our OPNsense Infrastructure for M146 at BBZW Surse
 
 ### Testing on Windows 11 22H2 virtualbox (works)
 
-1. Download virtualbox latest
-2. Download vagrant latest
+1. Download virtualbox latest: https://download.virtualbox.org/virtualbox/7.0.8/VirtualBox-7.0.8-156879-Win.exe
+2. Download vagrant latest: https://releases.hashicorp.com/vagrant/2.3.6/vagrant_2.3.6_windows_amd64.msi
 
 #### Pre-Requesities
 
