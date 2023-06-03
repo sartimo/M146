@@ -42,8 +42,8 @@ Vagrant.configure(2) do |config|
 
     # Network port assignment
     lanws.vm.network "private_network", type: "dhcp", virtualbox__intnet: "LAN"
-    dmzsrv.vm.network :forwarded_port, guest: 22, host: 10023, id: "ssh", auto_correct: true
-    dmzsrv.vm.provision "shell", inline: "cp /vagrant/ubuntu-netplan.yaml /etc/netplan/90-disable-double-gw.yaml && netplan apply"
+    lanws.vm.network :forwarded_port, guest: 22, host: 10023, id: "ssh", auto_correct: true
+    lanws.vm.provision "shell", inline: "cp /vagrant/ubuntu-netplan.yaml /etc/netplan/90-disable-double-gw.yaml && netplan apply"
   end
 
   # DMZ Server VM
