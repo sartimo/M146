@@ -1,34 +1,65 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
+# Multi machine Vagrant configuration
+Vagrant.configure(2) do |config|
 
-Vagrant.configure("3") do |config|
-  # Configure OPNsense VM
-  config.vm.define "opnsense" do |opnsense|
-    opnsense.vm.box = "opnsense/opnsense"
-    opnsense.vm.box_version = "21.7.3"
-    opnsense.vm.network "private_network", ip: "192.168.1.1" # LAN network
-    opnsense.vm.network "private_network", ip: "192.168.2.1" # DMZ network
-    opnsense.vm.network "private_network", ip: "192.168.3.1" # WAN network
-    opnsense.vm.provision "shell", inline: <<-SHELL
-      # Any additional provisioning commands for OPNsense
-    SHELL
+  config.winrm.timeout = 120
+  config.winrm.retry_limit = 100
+
+  # Firewall VM
+  config.vm.define :fw do |fw|
+    fw.vm.box = "mcree/opnsense"
+
+    fw.vm.provider 'virtualbox' do |vb|
+      vb.memory = 1024
+      vb.cpus = 1
+      vb.gui = true # want gui for testing
+      #vb.customize ['modifyvm', :id, '--nic1', 'nat'] # don't touch this interface!
+
+      # Setup firewall port assignments
+      vb.customize ['modifyvm', :id, '--nic2', 'intnet']
+      vb.customize ['modifyvm', :id, '--intnet2', 'LAN']
+      vb.customize ['modifyvm', :id, '--nic3', 'nat']
+      vb.customize ['modifyvm', :id, '--intnet3', 'WAN']
+      vb.customize ['modifyvm', :id, '--nic4', 'intnet']
+      vb.customize ['modifyvm', :id, '--intnet4', 'DMZ']
+    end
+
+    fw.vm.network :forwarded_port, guest: 22, host: 10022, id: "ssh", auto_correct: true
+
+    fw.vm.provision "file", source: "config.xml", destination: "/conf/config.xml" # copy default config to firewall
+    fw.vm.provision "shell", inline: "opnsense-shell reload" # apply configuration
   end
 
-  # Configure client VM
-  config.vm.define "client" do |client|
-    client.vm.box = "ubuntu/bionic64"
-    client.vm.network "private_network", ip: "192.168.1.2", virtualbox__intnet: "lan" # Connect to LAN network
-    client.vm.provision "shell", inline: <<-SHELL
-      # Any additional provisioning commands for the client machine
-    SHELL
+  # LAN Workstation VM
+  config.vm.define :lanws do |lanws|
+    lanws.vm.box = "ubuntu/bionic64"
+    lanws.vm.provider 'virtualbox' do |vb|
+      vb.memory = 4096
+      vb.cpus = 2
+      vb.gui = false
+    end
+
+    lanws.vm.boot_timeout = 1200
+
+    # Network port assignment
+    lanws.vm.network "private_network", type: "dhcp", virtualbox__intnet: "LAN"
+    dmzsrv.vm.network :forwarded_port, guest: 22, host: 10023, id: "ssh", auto_correct: true
+    dmzsrv.vm.provision "shell", inline: "cp /vagrant/ubuntu-netplan.yaml /etc/netplan/90-disable-double-gw.yaml && netplan apply"
   end
-  
-  # Configure server VM
-  config.vm.define "server" do |client|
-    client.vm.box = "ubuntu/bionic64"
-    client.vm.network "private_network", ip: "192.168.2.2", virtualbox__intnet: "dmz" # Connect to DMZ network
-    client.vm.provision "shell", inline: <<-SHELL
-      # Any additional provisioning commands for the client machine
-    SHELL
+
+  # DMZ Server VM
+  config.vm.define :dmzsrv do |dmzsrv|
+    dmzsrv.vm.box = "ubuntu/bionic64"
+    dmzsrv.vm.provider 'virtualbox' do |vb|
+      vb.memory = 1024
+      vb.cpus = 1
+      vb.gui = false
+    end
+    # Network port assignment
+    dmzsrv.vm.network "private_network", type: "dhcp", virtualbox__intnet: "DMZ"
+
+    dmzsrv.vm.network :forwarded_port, guest: 22, host: 10023, id: "ssh", auto_correct: true
+
+    # Disable automatically acquired default gateway on Vagrant's default NAT interface
+    dmzsrv.vm.provision "shell", inline: "cp /vagrant/ubuntu-netplan.yaml /etc/netplan/90-disable-double-gw.yaml && netplan apply"
   end
 end
