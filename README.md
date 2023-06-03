@@ -1,6 +1,33 @@
 # M146
 Vagrantfiles for provisioning our OPNsense Infrastructure for M146 at BBZW Sursee
 
+## Overview
+
+### LAN (192.168.100.0 /24)
+
+- VBox Internal Network
+- Firewall and Ubuntu Client (LANWS) are connected
+- Firewall is the DHCP server and default gateway in this network
+- LANWS is the DHCP client
+
+## DMZ (192.168.200.0 /24)
+
+- VBox Internal Network
+- Firewall and Ubuntu Server (DMZSRV) are connected
+- Firewall is DHCP Server and default gateway in this network
+- DMZSRC is the DHCP client
+
+## WAN (10.0.4.15 /24)
+
+- Only Firewall is connected to this network
+
+## Machine Overview
+
+- **OPNsense Firewall**: DHCP Server and Default Gateway for ```LAN``` and ```DMZ```
+- **LANWS**: Ubuntu Terminal Client for Testing Purposes
+- **DMZSRV**: Ubuntu Server with NGINX/Apache Web Server for zone routing purposes
+
+
 ### Testing on Windows 11 22H2 virtualbox (works)
 
 1. Download virtualbox latest
@@ -23,7 +50,3 @@ vagrant up --provider virtualbox
 5. Boote the DMZ Server using: ```vagrant ssh dmzsrv```.
 6. Testing 
 
-
-### Firewall Policies for LAN, WAN and DMZ
-
-https://github.com/mcree/vagrant-opnsense/blob/master/test/config.xml
