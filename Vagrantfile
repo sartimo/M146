@@ -31,11 +31,11 @@ Vagrant.configure(2) do |config|
 
   # LAN Workstation VM
   config.vm.define :lanws do |lanws|
-    lanws.vm.box = "ubuntu/bionic64"
+    lanws.vm.box = "ubuntu/trusty64"
     lanws.vm.provider 'virtualbox' do |vb|
       vb.memory = 4096
       vb.cpus = 2
-      vb.gui = false
+      vb.gui = true
     end
 
     lanws.vm.boot_timeout = 1200
@@ -48,11 +48,11 @@ Vagrant.configure(2) do |config|
 
   # DMZ Server VM
   config.vm.define :dmzsrv do |dmzsrv|
-    dmzsrv.vm.box = "ubuntu/bionic64"
+    dmzsrv.vm.box = "ubuntu/trusty64"
     dmzsrv.vm.provider 'virtualbox' do |vb|
       vb.memory = 1024
       vb.cpus = 1
-      vb.gui = false
+      vb.gui = true
     end
     # Network port assignment
     dmzsrv.vm.network "private_network", type: "dhcp", virtualbox__intnet: "DMZ"
