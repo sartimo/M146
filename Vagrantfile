@@ -25,7 +25,7 @@ Vagrant.configure(2) do |config|
 
     fw.vm.network :forwarded_port, guest: 22, host: 10022, id: "ssh", auto_correct: true
 
-    fw.vm.provision "file", source: "config.xml", destination: "/conf/config.xml" # copy default config to firewall
+    fw.vm.provision "file", source: "./config/config.xml", destination: "/conf/config.xml" # copy default config to firewall
     fw.vm.provision "shell", inline: "opnsense-shell reload" # apply configuration
   end
 
@@ -43,7 +43,7 @@ Vagrant.configure(2) do |config|
     # Network port assignment
     lanws.vm.network "private_network", type: "dhcp", virtualbox__intnet: "LAN"
     lanws.vm.network :forwarded_port, guest: 22, host: 10023, id: "ssh", auto_correct: true
-    lanws.vm.provision "shell", inline: "cp /vagrant/ubuntu-netplan.yaml /etc/netplan/90-disable-double-gw.yaml && netplan apply"
+    lanws.vm.provision "shell", inline: "cp ./config/ubuntu-netplan.yaml /etc/netplan/90-disable-double-gw.yaml && netplan apply"
   end
 
   # DMZ Server VM
@@ -60,6 +60,6 @@ Vagrant.configure(2) do |config|
     dmzsrv.vm.network :forwarded_port, guest: 22, host: 10023, id: "ssh", auto_correct: true
 
     # Disable automatically acquired default gateway on Vagrant's default NAT interface
-    dmzsrv.vm.provision "shell", inline: "cp /vagrant/ubuntu-netplan.yaml /etc/netplan/90-disable-double-gw.yaml && netplan apply"
+    dmzsrv.vm.provision "shell", inline: "cp ./config/ubuntu-netplan.yaml /etc/netplan/90-disable-double-gw.yaml && netplan apply"
   end
 end
