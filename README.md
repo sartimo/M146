@@ -1,9 +1,10 @@
 # M146
 Vagrantfiles for provisioning our OPNsense Infrastructure for M146 at BBZW Sursee
 
-### Testing on Windows 11 22H2 virtualbox (not working yet)
+### Testing on Windows 11 22H2 virtualbox
 
-1. Download virtualbox 6:  https://download.virtualbox.org/virtualbox/6.0.24/VirtualBox-6.0.24-139119-Win.exe
+1. Download virtualbox latest
+2. Download vagrant latest
 
 ```bash
 setx /m VBOX_INSTALL_PATH "C:\Program Files \Oracle\Virtualbox"
