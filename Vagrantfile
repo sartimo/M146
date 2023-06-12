@@ -6,7 +6,7 @@ Vagrant.configure(2) do |config|
 
   # Firewall VM
   config.vm.define :fw do |fw|
-    fw.name = "Firewall"
+    fw.vm.name = "Firewall"
     fw.vm.box = "mcree/opnsense"
 
     fw.vm.provider 'virtualbox' do |vb|
@@ -32,7 +32,7 @@ Vagrant.configure(2) do |config|
 
   # LAN Workstation VM
   config.vm.define :lanws do |lanws|
-    lanws.name = "LAN Workstation"
+    lanws.vm.name = "LAN Workstation"
     lanws.vm.box = "ubuntu/trusty64"
     lanws.vm.provider 'virtualbox' do |vb|
       vb.memory = 4096
@@ -80,7 +80,7 @@ Vagrant.configure(2) do |config|
   
   # DMZ Server VM
   config.vm.define :dmzsrv do |dmzsrv|
-    dmzsrv.name = "DMZ Server"
+    dmzsrv.vm.name = "DMZ Server"
     dmzsrv.vm.box = "ubuntu/trusty64"
     dmzsrv.vm.provider 'virtualbox' do |vb|
       vb.memory = 1024
