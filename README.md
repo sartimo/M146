@@ -14,7 +14,7 @@ Vagrantfiles for provisioning our OPNsense Infrastructure for M146 at BBZW Surse
     - [x] Verbindung Firewall zu Internet funktioniert
     - [x] IP-Addressierung sinnvoll und korrekt
     - [x] Internet von LAN und DMZ aus
-    - [ ] Keine Verbindung von WAN ins LAN
+    - [x] Keine Verbindung von WAN ins LAN
     - [ ] LAN Verbindung nur zu Webserver und sonst nichts
     - [ ] Webfilter für gewisse Webseiten Kategorien
     - [x] Installation Webserver im DMZ
