@@ -73,7 +73,7 @@ cd test
 
 #### (In main Terminal) boot firewall
 
-Username: vagrant
+Username: root
 
 Password: opnsense
 
