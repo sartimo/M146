@@ -4,23 +4,23 @@ Vagrantfiles for provisioning our OPNsense Infrastructure for M146 at BBZW Surse
 ## Overview
 
 - [ ] Anforderungen GL:
-    - [ ] Load Balancing
-    - [ ] Web Server in DMZ: erreichbar aus LAN und WAN
+    - [x ] Load Balancing
+    - [ x] Web Server in DMZ: erreichbar aus LAN und WAN
     - [ ] Kein Zugriff von WAN in DMZ außer Web Server. Kein Zugriff in LAN
 
 - [ ] Anforderungen Firewall LAB:
-    - [ ] Drei Interfaces erstellt: LAN, WAN, DMZ
+    - [x ] Drei Interfaces erstellt: LAN, WAN, DMZ
     - [ ] In jedem Netz ein Host
-    - [ ] Verbindung Hosts zu Firewall funktioniert
-    - [ ] Verbindung Firewall zu Internet funktioniert
-    - [ ] IP-Addressierung sinnvoll und korrekt
-    - [ ] Internet von LAN und DMZ aus
+    - [ x] Verbindung Hosts zu Firewall funktioniert
+    - [x ] Verbindung Firewall zu Internet funktioniert
+    - [ x] IP-Addressierung sinnvoll und korrekt
+    - [ x] Internet von LAN und DMZ aus
     - [ ] Keine Verbindung von WAN ins LAN
     - [ ] WAN Verbindung nur zu Webserver und sonst nichts
     - [ ] LAN Verbindung nur zu Webserver und sonst nichts
     - [ ] Webfilter für gewisse Webseiten Kategorien
-    - [ ] Installation Webserver im DMZ
-    - [ ] Verbindung von DMZ zu LAN (open up DNS)
+    - [ x] Installation Webserver im DMZ
+    - [x ] Verbindung von DMZ zu LAN (open up DNS)
 
 ### LAN (192.168.200.0 /24)
 
