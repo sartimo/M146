@@ -35,6 +35,7 @@ Vagrantfiles for provisioning our OPNsense Infrastructure for M146 at BBZW Surse
 - Firewall and Ubuntu Server (DMZSRV) are connected
 - Firewall is DHCP Server and default gateway in this network
 - DMZSRC is the DHCP client
+- **Website pointing to 192.168.100.100:80**
 
 ## WAN (10.0.4.15 /24)
 
