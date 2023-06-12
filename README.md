@@ -3,7 +3,7 @@ Vagrantfiles for provisioning our OPNsense Infrastructure for M146 at BBZW Surse
 
 ## Overview
 
-- [ ] Anforderungen GL:
+- [x] Anforderungen GL:
     - [x] Load Balancing
     - [x] Web Server in DMZ: erreichbar aus LAN und WAN
     - [x] Kein Zugriff von WAN in DMZ außer Web Server
