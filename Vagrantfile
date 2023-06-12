@@ -54,7 +54,7 @@ Vagrant.configure(2) do |config|
   end
 
   # WAN Workstation VM
-  config.vm.define :lanws do |wanws|
+  config.vm.define :wanws do |wanws|
     wanws.vm.box = "ubuntu/trusty64"
     wanws.vm.provider 'virtualbox' do |vb|
       vb.memory = 4096
