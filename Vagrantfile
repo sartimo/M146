@@ -72,7 +72,10 @@ Vagrant.configure(2) do |config|
     # remove default gateway
     dmzsrv.vm.provision "shell", inline: "ip route delete default"
 
-    # add default gateway 192.168.200.1
+    # add default gateway 192.168.100.1
     dmzsrv.vm.provision "shell", inline: "ip route add default via 192.168.100.1 dev eth1"
+    
+    # boot an nginx server pointing to localhost -> 192.168.100.100:80
+    dmzsrv.vm.provision "shell", inline: "sudo apt-get update && sudo apt-get install -y nginx && echo 'server {\n  listen 80;\n  root /var/www/html;\n  index index.html index.htm;\n\n  location / {\n    try_files $uri $uri/ =404;\n  }\n}' | sudo tee /etc/nginx/sites-available/default && sudo service nginx restart"
   end
 end
