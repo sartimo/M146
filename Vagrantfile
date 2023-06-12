@@ -25,7 +25,7 @@ Vagrant.configure(2) do |config|
 
     fw.vm.network :forwarded_port, guest: 22, host: 10022, id: "ssh", auto_correct: true
 
-    fw.vm.provision "file", source: "./config/config.xml", destination: "/conf/config.xml" # copy default config to firewall
+    fw.vm.provision "file", source: "./config.xml", destination: "/conf/config.xml" # copy default config to firewall
     fw.vm.provision "shell", inline: "opnsense-shell reload" # apply configuration
   end
 
