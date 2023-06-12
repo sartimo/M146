@@ -15,7 +15,7 @@ Vagrantfiles for provisioning our OPNsense Infrastructure for M146 at BBZW Surse
     - [x] IP-Addressierung sinnvoll und korrekt
     - [x] Internet von LAN und DMZ aus
     - [x] Keine Verbindung von WAN ins LAN
-    - [ ] LAN Verbindung nur zu Webserver und sonst nichts
+    - [x] LAN Verbindung nur zu Webserver und sonst nichts
     - [ ] Webfilter für gewisse Webseiten Kategorien
     - [x] Installation Webserver im DMZ
     - [x] Verbindung von DMZ zu LAN (open up DNS)
