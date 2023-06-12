@@ -9,7 +9,7 @@ Vagrantfiles for provisioning our OPNsense Infrastructure for M146 at BBZW Surse
     - [x] Kein Zugriff von WAN in DMZ außer Web Server
 - [ ] Anforderungen Firewall LAB:
     - [x] Drei Interfaces erstellt: LAN, WAN, DMZ
-    - [x] In jedem Netz ein Host
+    - [ ] In jedem Netz ein Host
     - [x] Verbindung Hosts zu Firewall funktioniert
     - [x] Verbindung Firewall zu Internet funktioniert
     - [x] IP-Addressierung sinnvoll und korrekt
