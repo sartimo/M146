@@ -53,6 +53,29 @@ Vagrant.configure(2) do |config|
 
   end
 
+  # WAN Workstation VM
+  config.vm.define :lanws do |wanws|
+    wanws.vm.box = "ubuntu/trusty64"
+    wanws.vm.provider 'virtualbox' do |vb|
+      vb.memory = 4096
+      vb.cpus = 2
+      vb.gui = true
+    end
+
+    wanws.vm.boot_timeout = 1200
+
+    # Network port assignment
+    wanws.vm.network "private_network", type: "dhcp", virtualbox__intnet: "WAN"
+    wanws.vm.network :forwarded_port, guest: 22, host: 10023, id: "ssh", auto_correct: true
+    # wanws.vm.provision "shell", inline: "cp /vagrant/ubuntu-netplan.yaml /etc/netplan/90-disable-double-gw.yaml && netplan apply"
+    
+    # remove default gateway
+    wanws.vm.provision "shell", inline: "ip route delete default"
+
+    # add default gateway 10.0.4.15
+    wanws.vm.provision "shell", inline: "ip route add default via 10.0.4.15 dev eth1"
+  end
+  
   # DMZ Server VM
   config.vm.define :dmzsrv do |dmzsrv|
     dmzsrv.vm.box = "ubuntu/trusty64"
