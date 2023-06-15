@@ -77,8 +77,8 @@ opnsense-update -y
 ```
 > :warning: You will need another windows vm with LAN access and the SSL certificate installed to trusted root.
 
-> After this: go to services/web proxy/acl. Then download acls and select the category social_media for testing purposes. Then click download & apply. 
-> It is important to do this using hotspot.
+> ⚠️: After this: go to services/web proxy/acl. Then download acls and select the category social_media for testing purposes. Then click download & apply. 
+> ⚠️: It is important to do this using hotspot.
 > Test LAN and DMZ access to sites like Twitter.com
 
 - Webpanel for Firewall is located at: https://127.0.0.1:10443 at the host machine. Login is: root & opnsense
