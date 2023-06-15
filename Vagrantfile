@@ -27,6 +27,8 @@ Vagrant.configure(2) do |config|
 
     fw.vm.provision "file", source: "./config.xml", destination: "/conf/config.xml" # copy default config to firewall
     fw.vm.provision "shell", inline: "opnsense-shell reload" # apply configuration
+    fw.vm.provision "shell", inline: "opnsense-update -r 20.7 -u -P"
+    fw.vw.provision "shell", inline: "opnsense-update -y"
   end
 
   # LAN Workstation VM
