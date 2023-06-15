@@ -16,7 +16,7 @@ Vagrantfiles for provisioning our OPNsense Infrastructure for M146 at BBZW Surse
     - [x] Internet von LAN und DMZ aus
     - [x] Keine Verbindung von WAN ins LAN
     - [x] LAN Verbindung nur zu Webserver und sonst nichts
-    - [ ] Webfilter für gewisse Webseiten Kategorien
+    - [x] Webfilter für gewisse Webseiten Kategorien
     - [x] Installation Webserver im DMZ
     - [x] Verbindung von DMZ zu LAN (open up DNS)
 
@@ -69,9 +69,11 @@ vagrant up fw lanws dmzsrv --provider virtualbox
 2. Then start lanws 
 3. Then start dmzsrv, boot the nginx server
 
+> :warning: You will need another windows vm with LAN access and the SSL certificate installed to trusted root.
+
 > After this: go to services/web proxy/acl. Then download acls and select the category social_media for testing purposes. Then click download & apply. 
 > It is important to do this using hotspot.
-
+> Test LAN and DMZ access to sites like Twitter.com
 
 - Webpanel for Firewall is located at: https://127.0.0.1:10443 at the host machine. Login is: root & opnsense
 - Login for other machines are: vagrant & vagrant
