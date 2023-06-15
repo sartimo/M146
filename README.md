@@ -69,6 +69,12 @@ vagrant up fw lanws dmzsrv --provider virtualbox
 2. Then start lanws 
 3. Then start dmzsrv, boot the nginx server
 
+> ⚠️: You need to upgrade opnsense firmware to latest using these commands:
+
+```bash
+opnsense-update -r 20.7 -u -P
+opnsense-update -y
+```
 > :warning: You will need another windows vm with LAN access and the SSL certificate installed to trusted root.
 
 > After this: go to services/web proxy/acl. Then download acls and select the category social_media for testing purposes. Then click download & apply. 
