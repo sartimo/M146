@@ -50,3 +50,29 @@ Vagrantfiles for provisioning our OPNsense Infrastructure for M146 at BBZW Surse
 
 # Setup
 
+
+1. Download virtualbox latest: https://download.virtualbox.org/virtualbox/7.0.8/VirtualBox-7.0.8-156879-Win.exe
+2. Download vagrant latest: https://releases.hashicorp.com/vagrant/2.3.6/vagrant_2.3.6_windows_amd64.msi
+
+#### Pre-Requesities
+
+Remember: run using hotspot since WAN access is bridged and traffic may be blocked by the host network of WAN.
+
+```bash
+setx /m VBOX_INSTALL_PATH "C:\Program Files \Oracle\Virtualbox"
+refreshenv
+git clone https://github.com/0xtimosarkar/M146
+cd M146
+vagrant up fw lanws dmzsrv --provider virtualbox
+```
+1. This will boot firewall, upgrade it to v20.7
+2. Then start lanws 
+3. Then start dmzsrv, boot the nginx server
+
+> After this: go to services/web proxy/acl. Then download acls and select the category social_media for testing purposes. Then click download & apply. 
+> It is important to do this using hotspot.
+
+
+- Webpanel for Firewall is located at: https://127.0.0.1:10443 at the host machine. Login is: root & opnsense
+- Login for other machines are: vagrant & vagrant
+- To visually test webfilter: prepare a windows vm, put it into the internal vbox network LAN and install opnsense-ca.crt under trusted roots. Then access 
